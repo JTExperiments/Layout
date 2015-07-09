@@ -11,7 +11,8 @@ import LayoutFramework
 
 class StackCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
 
-    var stack : VerticalStack?
+    var stack : Stack?
+    var selectedSegmentIndex : Int = 0
 
     @IBOutlet weak var stackLayout: StackCollectionViewLayout!
 
@@ -26,14 +27,42 @@ class StackCollectionViewController: UICollectionViewController, UICollectionVie
     }
 
     func reloadData() {
-        let plainTexts : [Sizable] = strings.map { str in
-            let plainText : PlainText = PlainText(text: str, font: font, maxSize: CGSizeMake(self.view.frame.size.width - 0, CGFloat.max))
-            return plainText
+
+        switch (self.selectedSegmentIndex) {
+        case 0...3:
+            let plainTexts : [Sizable] = strings.map { str in
+                let plainText : PlainText = PlainText(text: str, font: font, maxSize: CGSizeMake(self.view.frame.size.width - 0, CGFloat.max))
+                return plainText
+            }
+
+            switch (self.selectedSegmentIndex) {
+            case 0:
+                self.stack = VerticalStack(sizables: plainTexts, spacing: 10, inset: Inset(top: 20, left: 0, bottom: 10, right: 0))
+            case 1:
+                self.stack = VerticalLeftAlignedStack(sizables: plainTexts, spacing: 10, inset: Inset(top: 20, left: 0, bottom: 10, right: 0))
+            case 2:
+                self.stack = VerticalJustifiedStack(sizables: plainTexts, spacing: 10, inset: Inset(top: 20, left: 0, bottom: 10, right: 0))
+            case 3:
+                self.stack = VerticalRightAlignedStack(sizables: plainTexts, spacing: 10, inset: Inset(top: 20, left: 0, bottom: 10, right: 0))
+            default:
+                break
+            }
+        default:
+            let plainTexts : [Sizable] = strings.map { str in
+                let plainText : PlainText = PlainText(text: str, font: font, maxSize: CGSizeMake(300, CGFloat.max))
+                return plainText
+            }
+
+            self.stack = HorizontalStack(sizables: plainTexts, spacing: 10, inset: Inset(top: 20, left: 10, bottom: 20, right: 10))
         }
 
-        self.stack = VerticalJustifiedStack(sizables: plainTexts, spacing: 10, inset: Inset(top: 20, left: 0, bottom: 10, right: 0))
         self.stackLayout.stack = self.stack
         self.collectionView?.reloadData()
+    }
+
+    @IBAction func segmentValueDidChange(sender: UISegmentedControl) {
+        self.selectedSegmentIndex = sender.selectedSegmentIndex
+        self.reloadData()
     }
 
     // MARK: UICollectionViewDataSource
