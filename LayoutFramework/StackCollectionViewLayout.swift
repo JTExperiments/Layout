@@ -10,10 +10,37 @@ import UIKit
 
 public class StackCollectionViewLayout: UICollectionViewLayout {
 
-    var stack : Stack?
+    public var stack : Stack? {
+        didSet {
+            self.invalidateLayout()
+        }
+    }
 
-//    public override func layoutAttributesForElementsInRect(rect: CGRect) -> [AnyObject]? {
-//        
-//    }
+    public override func layoutAttributesForElementsInRect(rect: CGRect) -> [AnyObject]? {
+        let frames = stack?.framesInRect(rect) ?? []
+
+        var attributes = [UICollectionViewLayoutAttributes]()
+        for (index, frame) in enumerate(frames) {
+            let item = find(stack!.frames, frame)!
+            let attribute : UICollectionViewLayoutAttributes = UICollectionViewLayoutAttributes(forCellWithIndexPath: NSIndexPath(forItem: item, inSection: 0))
+            attribute.frame = frame
+            attributes.append(attribute)
+        }
+        return attributes
+    }
+
+    public override func layoutAttributesForItemAtIndexPath(indexPath: NSIndexPath) -> UICollectionViewLayoutAttributes! {
+
+        let attribute : UICollectionViewLayoutAttributes = UICollectionViewLayoutAttributes(forCellWithIndexPath: indexPath)
+
+        let frame = stack?.frames[indexPath.row] ?? CGRectZero
+        attribute.frame = frame
+        return attribute
+    }
+
+    public override func collectionViewContentSize() -> CGSize {
+        var size = self.stack?.size ?? CGSizeZero
+        return size
+    }
 
 }

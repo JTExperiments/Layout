@@ -24,6 +24,7 @@
 		1A3EA5461B4EB0CD0008708F /* CollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A3EA5451B4EB0CD0008708F /* CollectionViewController.swift */; };
 		1A3EA5481B4EB1030008708F /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A3EA5471B4EB1030008708F /* Constants.swift */; };
 		1A3EA54E1B4EB9E00008708F /* StackCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A3EA54D1B4EB9E00008708F /* StackCollectionViewLayout.swift */; };
+		1A3EA5501B4ECA300008708F /* StackCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A3EA54F1B4ECA300008708F /* StackCollectionViewController.swift */; };
 		1A6145BF1B4E81B900646E89 /* StackTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A6145BE1B4E81B900646E89 /* StackTests.swift */; };
 		1A9299A81B4E6CC100AFB05C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A9299A71B4E6CC100AFB05C /* AppDelegate.swift */; };
 		1A9299AA1B4E6CC100AFB05C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A9299A91B4E6CC100AFB05C /* ViewController.swift */; };
@@ -97,6 +98,7 @@
 		1A3EA5451B4EB0CD0008708F /* CollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewController.swift; sourceTree = "<group>"; };
 		1A3EA5471B4EB1030008708F /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		1A3EA54D1B4EB9E00008708F /* StackCollectionViewLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StackCollectionViewLayout.swift; sourceTree = "<group>"; };
+		1A3EA54F1B4ECA300008708F /* StackCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StackCollectionViewController.swift; sourceTree = "<group>"; };
 		1A6145BE1B4E81B900646E89 /* StackTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StackTests.swift; sourceTree = "<group>"; };
 		1A9299A21B4E6CC100AFB05C /* Layout.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Layout.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1A9299A61B4E6CC100AFB05C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -218,6 +220,7 @@
 				1A3EA5471B4EB1030008708F /* Constants.swift */,
 				1A9299A91B4E6CC100AFB05C /* ViewController.swift */,
 				1A3EA5451B4EB0CD0008708F /* CollectionViewController.swift */,
+				1A3EA54F1B4ECA300008708F /* StackCollectionViewController.swift */,
 				1A9299AB1B4E6CC100AFB05C /* Main.storyboard */,
 				1A9299AE1B4E6CC100AFB05C /* Images.xcassets */,
 				1A9299B01B4E6CC100AFB05C /* LaunchScreen.xib */,
@@ -452,6 +455,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1A3EA5461B4EB0CD0008708F /* CollectionViewController.swift in Sources */,
+				1A3EA5501B4ECA300008708F /* StackCollectionViewController.swift in Sources */,
 				1A9299AA1B4E6CC100AFB05C /* ViewController.swift in Sources */,
 				1A9299A81B4E6CC100AFB05C /* AppDelegate.swift in Sources */,
 				1A3EA5481B4EB1030008708F /* Constants.swift in Sources */,

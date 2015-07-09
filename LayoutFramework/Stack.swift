@@ -45,6 +45,9 @@ public class Stack : Sizable, Drawable {
     public private (set) var sizables : [Sizable]
     public private (set) var size : CGSize = CGSizeZero
     public private (set) var frames : [CGRect] = []
+    public var count : Int {
+        return self.sizables.count
+    }
     public var inset : Inset = Inset() {
         didSet {
             self.reloadData()
@@ -63,8 +66,14 @@ public class Stack : Sizable, Drawable {
         self.reloadData()
     }
 
-    public func sizablesInRect(rect: CGRect) -> [Sizable] {
-        return []
+    public func framesInRect(rect: CGRect) -> [CGRect] {
+        var frames : [CGRect] = []
+        for (index, frame) in enumerate(self.frames) {
+            if CGRectIntersectsRect(frame, rect) {
+                frames.append(frame)
+            }
+        }
+        return frames
     }
 
     // MARK: Private

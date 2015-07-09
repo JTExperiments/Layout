@@ -35,6 +35,7 @@ public class StackCollectionViewCell: UICollectionViewCell {
         self.stackView = StackView(frame: self.bounds)
         self.stackView.backgroundColor = UIColor.whiteColor()
         self.stackView.autoresizingMask = .FlexibleWidth | .FlexibleHeight
+        self.stackView.setTranslatesAutoresizingMaskIntoConstraints(true)
         self.addSubview(self.stackView)
     }
 }
