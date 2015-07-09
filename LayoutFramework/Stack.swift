@@ -45,6 +45,11 @@ public class Stack : Sizable, Drawable {
     public private (set) var sizables : [Sizable]
     public private (set) var size : CGSize = CGSizeZero
     public private (set) var frames : [CGRect] = []
+    public var maxSize : CGSize = CGSizeMax {
+        didSet {
+            self.reloadData()
+        }
+    }
     public var count : Int {
         return self.sizables.count
     }
@@ -79,12 +84,18 @@ public class Stack : Sizable, Drawable {
     // MARK: Private
 
     private func reloadData() {
-        self.calculateSize()
+        self.calculateSize(CGSizeMax)
         self.calculateFrames()
     }
 
-    private func calculateSize() {
-        // Override by subclass
+    public func calculateSize(externalMaxSize: CGSize) -> CGSize {
+        if self.maxSize.width > externalMaxSize.width || self.maxSize.height > externalMaxSize.height {
+            self.maxSize = CGSize(
+                width: min(externalMaxSize.width, self.maxSize.width),
+                height: min(externalMaxSize.height, self.maxSize.height)
+            )
+        }
+        return size
     }
 
     private func calculateFrames() {
@@ -111,15 +122,18 @@ public class Stack : Sizable, Drawable {
 
 public class HorizontalStack : Stack {
 
-    private override func calculateSize() {
+    public override func calculateSize(externalMaxSize: CGSize) -> CGSize {
         var size = CGSizeZero
         for obj in self.sizables {
-            size.width += obj.size.width
-            size.height = max(size.height, obj.size.height)
+            let objSize = obj.calculateSize(externalMaxSize)
+            size.height = min(externalMaxSize.height, max(size.height, objSize.height))
+            size.width += objSize.width
         }
         size.width += (spacing * CGFloat(self.sizables.count - 1))
         size = inset.applyToSize(size)
+        size.width = min(externalMaxSize.width, size.width, self.maxSize.width)
         self.size = size
+        return size
     }
 
     public override func calculateFrames() {
@@ -142,7 +156,7 @@ public class HorizontalStack : Stack {
 
 public class VerticalStack : Stack {
 
-    private override func calculateSize() {
+    public override func calculateSize(externalMaxSize: CGSize) -> CGSize {
         var size = CGSizeZero
         for obj in self.sizables {
             size.width = max(size.width, obj.size.width)
@@ -151,6 +165,7 @@ public class VerticalStack : Stack {
         size.height += (spacing * CGFloat(self.sizables.count - 1))
         size = inset.applyToSize(size)
         self.size = size
+        return size
     }
 
     public override func calculateFrames() {

@@ -10,10 +10,12 @@ import Foundation
 
 public protocol Sizable {
     var size : CGSize { get }
+    func calculateSize(maxSize: CGSize) -> CGSize
 }
 
 public let CGSizeMax = CGSizeMake(CGFloat.max, CGFloat.max)
 
+/*
 public struct AspectFit<T:Sizable> : Sizable {
     let content : T
     let maxSize : CGSize
@@ -45,4 +47,4 @@ public struct AspectFill<T:Sizable> : Sizable {
         self.maxSize = maxSize
     }
 }
-
+*/

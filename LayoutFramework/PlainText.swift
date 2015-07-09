@@ -8,10 +8,10 @@
 
 import CoreText
 
-public struct PlainText : Sizable {
+public class PlainText : Sizable {
     let text : String
     let font : UIFont
-    let maxSize : CGSize
+    var maxSize : CGSize
     var attributedString : NSAttributedString {
         return NSAttributedString(string: self.text, attributes: [NSFontAttributeName:self.font])
     }
@@ -40,5 +40,13 @@ public struct PlainText : Sizable {
         self.text = text
         self.font = font
         self.maxSize = maxSize
+    }
+
+    public func calculateSize(externalMaxSize: CGSize) -> CGSize {
+        self.maxSize = CGSize(
+            width: min(self.maxSize.width, externalMaxSize.width),
+            height: min(self.maxSize.height, externalMaxSize.height)
+            )
+        return self.size
     }
 }

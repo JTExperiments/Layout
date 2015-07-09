@@ -199,4 +199,66 @@ class StackTests: XCTestCase {
         }
     }
 
+    func testPerfectNestedStack() {
+
+        let horizontal1 = HorizontalStack(sizables:
+            [
+                FlexibleObject(volume: CGSizeMake(3, 3), maxSize: CGSizeMake(8, 2)),   // 5, 2
+                FlexibleObject(volume: CGSizeMake(2, 4), maxSize: CGSizeMake(8, 2)),   // 4, 2
+            ]
+        ) // | 5, 2 | 4, 2 |
+        XCTAssertEqual(horizontal1.size, CGSizeMake(9, 2), "")
+
+
+        let verticalInfo = VerticalJustifiedStack(sizables:
+            [
+                FlexibleObject(volume: CGSizeMake(100, 1), maxSize: CGSizeMake(4, 2)),
+                FlexibleObject(volume: CGSizeMake(100, 1), maxSize: CGSizeMake(4, 2)),
+            ]
+            , spacing: 1)   // 4, 5
+
+        let horizontalTop = HorizontalStack(sizables:
+            [
+                FixedObject(size: CGSizeMake(4, 4)),   // 4, 4
+                verticalInfo  // 4, 5
+            ]
+            , spacing: 1  // 8 + 1, 5
+            , inset: Inset(top: 1, left: 1, bottom: 1, right: 1))  // 11, 7
+
+        XCTAssertEqual(verticalInfo.size, CGSizeMake(4, 5), "")
+        XCTAssertEqual(horizontalTop.size, CGSizeMake(11, 7), "")
+    }
+
+    func testCollapsingStack() {
+        let horizontal1 = HorizontalStack(sizables:
+            [
+                FlexibleObject(volume: CGSizeMake(3, 3), maxSize: CGSizeMake(8, 2)),   // 5, 2
+                FlexibleObject(volume: CGSizeMake(2, 4), maxSize: CGSizeMake(8, 2)),   // 4, 2
+            ]
+        ) // | 5, 2 | 4, 2 |
+        horizontal1.maxSize = CGSizeMake(CGFloat.max, 1)
+        XCTAssertEqual(horizontal1.size, CGSizeMake(16, 1), "")
+
+        horizontal1.maxSize = CGSizeMake(2, 16)
+        XCTAssertEqual(horizontal1.size, CGSizeMake(2, 4), "")
+    }
+
+    func testExpandingStack() {
+        let vertical = VerticalStack(sizables:
+            [
+                FlexibleObject(volume: CGSizeMake(3, 3), maxSize: CGSizeMax),   // 3, 3
+                FlexibleObject(volume: CGSizeMake(2, 4), maxSize: CGSizeMake(4, 2)),   // 4, 2
+            ]
+        ) // | 3, 3 | 4, 2 |
+        XCTAssertEqual(vertical.size, CGSizeMake(4, 5), "")
+
+        vertical.maxSize = CGSizeMake(CGFloat.max, 1)
+        XCTAssertEqual(vertical.size, CGSizeMake(17, 1), "")
+
+        vertical.spacing = 1
+        XCTAssertEqual(vertical.size, CGSizeMake(18, 1), "")
+
+        vertical.inset = Inset(top: 1, left: 1, bottom: 1, right: 1)
+        XCTAssertEqual(vertical.size, CGSizeMake(20, 1), "")
+    }
 }

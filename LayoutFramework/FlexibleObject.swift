@@ -32,4 +32,12 @@ public class FlexibleObject : Sizable {
         self.volume = volume
         self.maxSize = maxSize
     }
+
+    public func calculateSize(externalMaxSize: CGSize) -> CGSize {
+        self.maxSize = CGSize(
+            width: min(externalMaxSize.width, self.maxSize.width),
+            height: min(externalMaxSize.height, self.maxSize.height)
+        )
+        return self.size
+    }
 }

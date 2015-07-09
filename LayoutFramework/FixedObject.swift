@@ -13,4 +13,11 @@ public struct FixedObject : Sizable {
     public init(size: CGSize) {
         self.size = size
     }
+    public func calculateSize(maxSize: CGSize) -> CGSize {
+        var size = CGSize(
+            width: min(maxSize.width, self.size.width),
+            height: min(maxSize.height, self.size.height)
+        )
+        return size
+    }
 }
