@@ -27,12 +27,11 @@ class StackCollectionViewController: UICollectionViewController, UICollectionVie
 
     func reloadData() {
         let plainTexts : [Sizable] = strings.map { str in
-            let plainText : PlainText = PlainText(text: str, font: font, maxSize: CGSizeMake(self.view.frame.size.width - 20, CGFloat.max))
+            let plainText : PlainText = PlainText(text: str, font: font, maxSize: CGSizeMake(self.view.frame.size.width - 0, CGFloat.max))
             return plainText
         }
 
-        self.stack = VerticalStack(sizables: plainTexts, spacing: 10, inset: Inset(top: 20, left: 10, bottom: 10, right: 10))
-//        self.stack?.spacing = 10
+        self.stack = VerticalJustifiedStack(sizables: plainTexts, spacing: 10, inset: Inset(top: 20, left: 0, bottom: 10, right: 0))
         self.stackLayout.stack = self.stack
         self.collectionView?.reloadData()
     }

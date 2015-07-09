@@ -171,3 +171,64 @@ public class VerticalStack : Stack {
     }
 
 }
+
+public class VerticalJustifiedStack : VerticalStack {
+
+    public override func calculateFrames() {
+        let maxWidth : CGFloat = self.size.width - inset.width
+        var frames : [CGRect] = []
+        var lastFrame = CGRectMake(inset.left, -spacing + inset.top, 0, 0)
+        for (index, obj) in enumerate(self.sizables) {
+            var frame : CGRect = CGRectZero
+            frame.origin = CGPoint(
+                x:inset.left,
+                y:CGRectGetMaxY(lastFrame) + spacing
+            )
+            frame.size = CGSizeMake(maxWidth, obj.size.height)
+            lastFrame = frame
+            frames.append(frame)
+        }
+        self.frames = frames
+    }
+
+}
+
+public class VerticalLeftAlignedStack : VerticalStack {
+
+    public override func calculateFrames() {
+        let maxWidth : CGFloat = self.size.width - inset.width
+        var frames : [CGRect] = []
+        var lastFrame = CGRectMake(inset.left, -spacing + inset.top, 0, 0)
+        for (index, obj) in enumerate(self.sizables) {
+            var frame : CGRect = CGRectZero
+            frame.origin = CGPoint(
+                x:inset.left,
+                y:CGRectGetMaxY(lastFrame) + spacing
+            )
+            frame.size = obj.size
+            lastFrame = frame
+            frames.append(frame)
+        }
+        self.frames = frames
+    }
+}
+
+public class VerticalRightAlignedStack : VerticalStack {
+
+    public override func calculateFrames() {
+        let maxWidth : CGFloat = self.size.width - inset.width
+        var frames : [CGRect] = []
+        var lastFrame = CGRectMake(inset.left, -spacing + inset.top, 0, 0)
+        for (index, obj) in enumerate(self.sizables) {
+            var frame : CGRect = CGRectZero
+            frame.origin = CGPoint(
+                x:(maxWidth - obj.size.width + inset.left),
+                y:CGRectGetMaxY(lastFrame) + spacing
+            )
+            frame.size = obj.size
+            lastFrame = frame
+            frames.append(frame)
+        }
+        self.frames = frames
+    }
+}

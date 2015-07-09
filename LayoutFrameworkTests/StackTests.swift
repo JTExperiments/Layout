@@ -64,14 +64,87 @@ class StackTests: XCTestCase {
         XCTAssertEqual(stack.frames[1], CGRectMake(10, 70, 30, 70), "")
         XCTAssertEqual(stack.frames[2], CGRectMake(0, 150, 50, 50), "")
 
-
         stack.spacing = 0
         stack.inset  = Inset(top: 5, left: 10, bottom: 25, right: 15)
         XCTAssertEqual(stack.size, CGSizeMake(75, 210), "")
         XCTAssertEqual(stack.frames[0], CGRectMake(15, 5, 40, 60), "")
         XCTAssertEqual(stack.frames[1], CGRectMake(20, 65, 30, 70), "")
         XCTAssertEqual(stack.frames[2], CGRectMake(10, 135, 50, 50), "")
+    }
 
+    func testVerticalJustifiedStack() {
+        let object1 = SizableObject(size: CGSizeMake(40, 60))
+        let object2 = SizableObject(size: CGSizeMake(30, 70))
+        let object3 = SizableObject(size: CGSizeMake(50, 50))
+        let stack = VerticalJustifiedStack(sizables: [object1, object2, object3], spacing: 0)
+
+        XCTAssertEqual(stack.size, CGSizeMake(50, 180), "")
+        XCTAssertEqual(stack.frames[0], CGRectMake(0, 0, 50, 60), "")
+        XCTAssertEqual(stack.frames[1], CGRectMake(0, 60, 50, 70), "")
+        XCTAssertEqual(stack.frames[2], CGRectMake(0, 130, 50, 50), "")
+
+        stack.spacing = 10
+        XCTAssertEqual(stack.size, CGSizeMake(50, 200), "")
+        XCTAssertEqual(stack.frames[0], CGRectMake(0, 0, 50, 60), "")
+        XCTAssertEqual(stack.frames[1], CGRectMake(0, 70, 50, 70), "")
+        XCTAssertEqual(stack.frames[2], CGRectMake(0, 150, 50, 50), "")
+
+        stack.spacing = 0
+        stack.inset  = Inset(top: 5, left: 10, bottom: 25, right: 15)
+        XCTAssertEqual(stack.size, CGSizeMake(75, 210), "")
+        XCTAssertEqual(stack.frames[0], CGRectMake(10, 5, 50, 60), "")
+        XCTAssertEqual(stack.frames[1], CGRectMake(10, 65, 50, 70), "")
+        XCTAssertEqual(stack.frames[2], CGRectMake(10, 135, 50, 50), "")
+    }
+
+    func testVerticalLeftAlignedStack() {
+        let object1 = SizableObject(size: CGSizeMake(40, 60))
+        let object2 = SizableObject(size: CGSizeMake(30, 70))
+        let object3 = SizableObject(size: CGSizeMake(50, 50))
+        let stack = VerticalLeftAlignedStack(sizables: [object1, object2, object3], spacing: 0)
+
+        XCTAssertEqual(stack.size, CGSizeMake(50, 180), "")
+        XCTAssertEqual(stack.frames[0], CGRectMake(0, 0, 40, 60), "")
+        XCTAssertEqual(stack.frames[1], CGRectMake(0, 60, 30, 70), "")
+        XCTAssertEqual(stack.frames[2], CGRectMake(0, 130, 50, 50), "")
+
+        stack.spacing = 10
+        XCTAssertEqual(stack.size, CGSizeMake(50, 200), "")
+        XCTAssertEqual(stack.frames[0], CGRectMake(0, 0, 40, 60), "")
+        XCTAssertEqual(stack.frames[1], CGRectMake(0, 70, 30, 70), "")
+        XCTAssertEqual(stack.frames[2], CGRectMake(0, 150, 50, 50), "")
+
+        stack.spacing = 0
+        stack.inset  = Inset(top: 5, left: 10, bottom: 25, right: 15)
+        XCTAssertEqual(stack.size, CGSizeMake(75, 210), "")
+        XCTAssertEqual(stack.frames[0], CGRectMake(10, 5, 40, 60), "")
+        XCTAssertEqual(stack.frames[1], CGRectMake(10, 65, 30, 70), "")
+        XCTAssertEqual(stack.frames[2], CGRectMake(10, 135, 50, 50), "")
+    }
+
+    func testVerticalRightAlignedStack() {
+        let object1 = SizableObject(size: CGSizeMake(40, 60))
+        let object2 = SizableObject(size: CGSizeMake(30, 70))
+        let object3 = SizableObject(size: CGSizeMake(50, 50))
+        let stack = VerticalRightAlignedStack(sizables: [object1, object2, object3], spacing: 0)
+
+        XCTAssertEqual(stack.size, CGSizeMake(50, 180), "")
+        XCTAssertEqual(stack.frames[0], CGRectMake(10, 0, 40, 60), "")
+        XCTAssertEqual(stack.frames[1], CGRectMake(20, 60, 30, 70), "")
+        XCTAssertEqual(stack.frames[2], CGRectMake(0, 130, 50, 50), "")
+
+        stack.spacing = 10
+        XCTAssertEqual(stack.size, CGSizeMake(50, 200), "")
+        XCTAssertEqual(stack.frames[0], CGRectMake(10, 0, 40, 60), "")
+        XCTAssertEqual(stack.frames[1], CGRectMake(20, 70, 30, 70), "")
+        XCTAssertEqual(stack.frames[2], CGRectMake(0, 150, 50, 50), "")
+
+        stack.spacing = 0
+        stack.inset  = Inset(top: 5, left: 10, bottom: 25, right: 15)
+        XCTAssertEqual(stack.size, CGSizeMake(75, 210), "")
+        XCTAssertEqual(stack.frames[0], CGRectMake(20, 5, 40, 60), "")
+        XCTAssertEqual(stack.frames[1], CGRectMake(30, 65, 30, 70), "")
+        XCTAssertEqual(stack.frames[2], CGRectMake(10, 135, 50, 50), "")
     }
 
     func testSizableInRect() {
