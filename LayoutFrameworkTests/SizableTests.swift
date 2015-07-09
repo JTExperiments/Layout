@@ -23,14 +23,14 @@ class SizableTests: XCTestCase {
     }
 
     func testAspectFill() {
-        let object = SizableObject(size: CGSizeMake(40, 50))
-        let aspectFill : AspectFill<SizableObject> = AspectFill(content: object, maxSize: CGSizeMake(100, 100))
+        let object = FixedObject(size: CGSizeMake(40, 50))
+        let aspectFill : AspectFill<FixedObject> = AspectFill(content: object, maxSize: CGSizeMake(100, 100))
         XCTAssertEqual(aspectFill.size, CGSizeMake(100, 125), "")
     }
 
     func testAspectFit() {
-        let object = SizableObject(size: CGSizeMake(40, 50))
-        let aspectFit : AspectFit<SizableObject> = AspectFit(content: object, maxSize: CGSizeMake(100, 100))
+        let object = FixedObject(size: CGSizeMake(40, 50))
+        let aspectFit : AspectFit<FixedObject> = AspectFit(content: object, maxSize: CGSizeMake(100, 100))
         XCTAssertEqual(aspectFit.size, CGSizeMake(80, 100), "")
     }
 

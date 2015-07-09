@@ -23,9 +23,9 @@ class StackTests: XCTestCase {
     }
 
     func testHorizontalStack() {
-        let object1 = SizableObject(size: CGSizeMake(40, 60))
-        let object2 = SizableObject(size: CGSizeMake(30, 70))
-        let object3 = SizableObject(size: CGSizeMake(50, 50))
+        let object1 = FixedObject(size: CGSizeMake(40, 60))
+        let object2 = FixedObject(size: CGSizeMake(30, 70))
+        let object3 = FixedObject(size: CGSizeMake(50, 50))
         let stack = HorizontalStack(sizables: [object1, object2, object3], spacing: 0)
 
         XCTAssertEqual(stack.size, CGSizeMake(120, 70), "")
@@ -48,9 +48,9 @@ class StackTests: XCTestCase {
     }
 
     func testVerticalStack() {
-        let object1 = SizableObject(size: CGSizeMake(40, 60))
-        let object2 = SizableObject(size: CGSizeMake(30, 70))
-        let object3 = SizableObject(size: CGSizeMake(50, 50))
+        let object1 = FixedObject(size: CGSizeMake(40, 60))
+        let object2 = FixedObject(size: CGSizeMake(30, 70))
+        let object3 = FixedObject(size: CGSizeMake(50, 50))
         let stack = VerticalStack(sizables: [object1, object2, object3], spacing: 0)
         
         XCTAssertEqual(stack.size, CGSizeMake(50, 180), "")
@@ -73,9 +73,9 @@ class StackTests: XCTestCase {
     }
 
     func testVerticalJustifiedStack() {
-        let object1 = SizableObject(size: CGSizeMake(40, 60))
-        let object2 = SizableObject(size: CGSizeMake(30, 70))
-        let object3 = SizableObject(size: CGSizeMake(50, 50))
+        let object1 = FixedObject(size: CGSizeMake(40, 60))
+        let object2 = FixedObject(size: CGSizeMake(30, 70))
+        let object3 = FixedObject(size: CGSizeMake(50, 50))
         let stack = VerticalJustifiedStack(sizables: [object1, object2, object3], spacing: 0)
 
         XCTAssertEqual(stack.size, CGSizeMake(50, 180), "")
@@ -98,9 +98,9 @@ class StackTests: XCTestCase {
     }
 
     func testVerticalLeftAlignedStack() {
-        let object1 = SizableObject(size: CGSizeMake(40, 60))
-        let object2 = SizableObject(size: CGSizeMake(30, 70))
-        let object3 = SizableObject(size: CGSizeMake(50, 50))
+        let object1 = FixedObject(size: CGSizeMake(40, 60))
+        let object2 = FixedObject(size: CGSizeMake(30, 70))
+        let object3 = FixedObject(size: CGSizeMake(50, 50))
         let stack = VerticalLeftAlignedStack(sizables: [object1, object2, object3], spacing: 0)
 
         XCTAssertEqual(stack.size, CGSizeMake(50, 180), "")
@@ -123,9 +123,9 @@ class StackTests: XCTestCase {
     }
 
     func testVerticalRightAlignedStack() {
-        let object1 = SizableObject(size: CGSizeMake(40, 60))
-        let object2 = SizableObject(size: CGSizeMake(30, 70))
-        let object3 = SizableObject(size: CGSizeMake(50, 50))
+        let object1 = FixedObject(size: CGSizeMake(40, 60))
+        let object2 = FixedObject(size: CGSizeMake(30, 70))
+        let object3 = FixedObject(size: CGSizeMake(50, 50))
         let stack = VerticalRightAlignedStack(sizables: [object1, object2, object3], spacing: 0)
 
         XCTAssertEqual(stack.size, CGSizeMake(50, 180), "")
@@ -148,9 +148,9 @@ class StackTests: XCTestCase {
     }
 
     func testSizableInRect() {
-        let object1 = SizableObject(size: CGSizeMake(10, 10))
-        let object2 = SizableObject(size: CGSizeMake(10, 10))
-        let object3 = SizableObject(size: CGSizeMake(10, 10))
+        let object1 = FixedObject(size: CGSizeMake(10, 10))
+        let object2 = FixedObject(size: CGSizeMake(10, 10))
+        let object3 = FixedObject(size: CGSizeMake(10, 10))
         let stack = HorizontalStack(sizables: [object1, object2, object3], spacing: 0)
 
         let rect1 = CGRectMake(0, 0, 1, 1)
